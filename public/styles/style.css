@@ -911,8 +911,12 @@ body.light-mode .legal-page h2 {
 }
 
 .case-feature__aside .btn {
+    align-self: stretch;
+    text-align: center;
+}
+
+.case-feature__aside .btn:first-of-type {
     margin-top: auto;
-    align-self: flex-start;
 }
 
 .case-stack {
