@@ -164,9 +164,12 @@ function initHeroCanvas() {
     });
 }
 
+function dismissHeroCurtain(curtain) {
+    if (!curtain) return;
+    curtain.classList.add("is-done");
+}
+
 function initHeroIntro() {
-    if (typeof gsap === "undefined") return;
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const hero = document.querySelector(".hero");
     const curtain = document.getElementById("hero-curtain");
     if (!hero) return;
@@ -183,11 +186,14 @@ function initHeroIntro() {
     const rightPanel = curtain?.querySelector(".hero-curtain__panel--right");
     const slash = curtain?.querySelector(".hero-curtain__slash");
     const mark = curtain?.querySelector(".hero-curtain__mark");
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    if (reduceMotion) {
-        gsap.set([letters, title, subtitle, actions, brandLine], { clearProps: "all", opacity: 1 });
-        if (brandLine) gsap.set(brandLine, { width: "7.5rem" });
-        if (curtain) curtain.classList.add("is-done");
+    // Filet de sécurité : le rideau ne doit jamais rester bloqué.
+    window.setTimeout(() => dismissHeroCurtain(curtain), 2500);
+
+    if (typeof gsap === "undefined" || reduceMotion) {
+        if (brandLine) brandLine.style.width = "7.5rem";
+        dismissHeroCurtain(curtain);
         return;
     }
 
@@ -208,7 +214,7 @@ function initHeroIntro() {
             .to(leftPanel, { xPercent: -102, duration: 0.85, ease: "power4.inOut" }, 0.55)
             .to(rightPanel, { xPercent: 102, duration: 0.85, ease: "power4.inOut" }, 0.55)
             .to([mark, slash], { opacity: 0, duration: 0.25 }, 0.95)
-            .add(() => curtain.classList.add("is-done"), 1.45);
+            .add(() => dismissHeroCurtain(curtain), 1.35);
     }
 
     const contentStart = curtain ? 0.85 : 0;

@@ -170,6 +170,8 @@ header.site-header {
 
 .hero-curtain.is-done {
     visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
 }
 
 .hero-curtain__panel {
