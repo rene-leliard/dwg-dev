@@ -321,7 +321,7 @@ function initScrollReveals() {
 
     gsap.utils.toArray(".section").forEach((section) => {
         const targets = section.querySelectorAll(
-            ".section-heading, .stat-card, .service-card, .signature-pill"
+            ".section-heading, .stat-card, .service-card, .case-row, .cta-band"
         );
         if (!targets.length) return;
 

@@ -1,33 +1,31 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<section id="presentation" class="section container">
-		<div class="section-heading">
-			<p class="eyebrow">A propos de DWG</p>
-			<h2>Des outils pro pour structurer et accélérer votre activité</h2>
-			<p class="section-lead">
-				Nous concevons des solutions digitales orientées performance métier : CRM, automatisations, portails clients et applications web/mobile.
-			</p>
-		</div>
-		<div class="stats-grid">
-			<div class="stat-card">
-				<span>+5 ans</span>
-				<p>Expérience en création web et accompagnement clients.</p>
+	<section id="presentation" class="section">
+		<div class="container">
+			<div class="section-split">
+				<div class="section-heading section-heading--flush">
+					<p class="eyebrow">À propos de DWG</p>
+					<h2>Des outils pro pour structurer et accélérer votre activité</h2>
+					<p class="section-lead">
+						Nous concevons des solutions digitales orientées performance métier : CRM, automatisations, portails clients et applications web/mobile.
+					</p>
+				</div>
+				<div class="stats-grid">
+					<div class="stat-card">
+						<span>+5 ans</span>
+						<p>Expérience en création web et accompagnement clients.</p>
+					</div>
+					<div class="stat-card">
+						<span>100%</span>
+						<p>De projets livrés avec suivi et maintenance.</p>
+					</div>
+					<div class="stat-card">
+						<span>Sur-mesure</span>
+						<p>Chaque solution est adaptée à votre activité.</p>
+					</div>
+				</div>
 			</div>
-			<div class="stat-card">
-				<span>100%</span>
-				<p>De projets livrés avec suivi et maintenance.</p>
-			</div>
-			<div class="stat-card">
-				<span>Sur-mesure</span>
-				<p>Chaque solution est adaptée à votre activité.</p>
-			</div>
-		</div>
-		<div class="signature-strip">
-			<span class="signature-pill">Stratégie claire</span>
-			<span class="signature-pill">Design utile</span>
-			<span class="signature-pill">Tech fiable</span>
-			<span class="signature-pill">Accompagnement humain</span>
 		</div>
 	</section>
 
@@ -38,57 +36,50 @@
 				<h2>Des solutions métiers, claires et mesurables</h2>
 				<p class="section-lead">Objectifs, livrables et résultats : chaque mission est cadrée et pilotée.</p>
 			</div>
-			<div class="row g-4">
-				<div class="col-lg-4">
-					<article class="service-card">
-						<div class="service-card__icon">
-							<i class="bi bi-gear"></i>
-						</div>
-						<h3>Outils & automatisations CRM</h3>
-						<p class="service-meta">Intégrations sur vos outils existants</p>
-						<p>Workflows, synchronisations et automatisations pour des process fiables.</p>
-						<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#serviceModalCms">En savoir plus</button>
-					</article>
-				</div>
-				<div class="col-lg-4">
-					<article class="service-card featured">
-						<div class="service-card__icon">
-							<i class="bi bi-shield-check"></i>
-						</div>
-						<h3>Maintenance web & mobile</h3>
-						<p class="service-meta">Stabilité, sécurité, performance</p>
-						<p>Supervision, correctifs et évolutions continues de vos outils.</p>
-						<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#serviceModalVitrine">En savoir plus</button>
-					</article>
-				</div>
-				<div class="col-lg-4">
-					<article class="service-card">
-						<div class="service-card__icon">
-							<i class="bi bi-lightning-charge"></i>
-						</div>
-						<h3>Apps web & mobile sur-mesure</h3>
-						<p class="service-meta">Sur devis</p>
-						<p>Applications métiers, portails clients et back-offices sur mesure.</p>
-						<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#serviceModalEcommerce">En savoir plus</button>
-					</article>
-				</div>
+			<div class="services-grid">
+				<article class="service-card">
+					<div class="service-card__icon">
+						<i class="bi bi-gear"></i>
+					</div>
+					<h3>Outils &amp; automatisations CRM</h3>
+					<p class="service-meta">Intégrations sur vos outils existants</p>
+					<p>Workflows, synchronisations et automatisations pour des process fiables.</p>
+					<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#serviceModalCms">En savoir plus</button>
+				</article>
+				<article class="service-card featured">
+					<p class="service-card__badge">Le plus demandé</p>
+					<div class="service-card__icon">
+						<i class="bi bi-shield-check"></i>
+					</div>
+					<h3>Maintenance web &amp; mobile</h3>
+					<p class="service-meta">Stabilité, sécurité, performance</p>
+					<p>Supervision, correctifs et évolutions continues de vos outils.</p>
+					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#serviceModalVitrine">En savoir plus</button>
+				</article>
+				<article class="service-card">
+					<div class="service-card__icon">
+						<i class="bi bi-lightning-charge"></i>
+					</div>
+					<h3>Apps web &amp; mobile sur-mesure</h3>
+					<p class="service-meta">Sur devis</p>
+					<p>Applications métiers, portails clients et back-offices sur mesure.</p>
+					<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#serviceModalEcommerce">En savoir plus</button>
+				</article>
 			</div>
 		</div>
 	</section>
 
-	<section id="cases" class="section section-muted">
+	<section id="cases" class="section">
 		<div class="container">
 			<div class="section-heading">
 				<p class="eyebrow">Cas d’usage</p>
 				<h2>Des scénarios concrets, orientés outils</h2>
 				<p class="section-lead">Exemples fréquents pour clarifier ce qui est livré.</p>
 			</div>
-			<div class="row g-4">
-				<div class="col-lg-4">
-					<article class="service-card">
-						<div class="service-card__icon">
-							<i class="bi bi-briefcase"></i>
-						</div>
+			<div class="case-stack">
+				<article class="case-row">
+					<span class="case-row__index">01</span>
+					<div class="case-row__body">
 						<h3>CRM + automatisations</h3>
 						<p>Centralisation des leads, scoring, relances et reporting.</p>
 						<ul class="case-list">
@@ -96,13 +87,11 @@
 							<li>Suivi commercial plus fiable</li>
 							<li>Moins d’oubli dans les relances</li>
 						</ul>
-					</article>
-				</div>
-				<div class="col-lg-4">
-					<article class="service-card">
-						<div class="service-card__icon">
-							<i class="bi bi-phone"></i>
-						</div>
+					</div>
+				</article>
+				<article class="case-row">
+					<span class="case-row__index">02</span>
+					<div class="case-row__body">
 						<h3>App mobile terrain</h3>
 						<p>Saisie terrain, synchronisation et validation centralisée.</p>
 						<ul class="case-list">
@@ -110,13 +99,11 @@
 							<li>Synchronisation temps réel</li>
 							<li>Alertes et statuts automatisés</li>
 						</ul>
-					</article>
-				</div>
-				<div class="col-lg-4">
-					<article class="service-card">
-						<div class="service-card__icon">
-							<i class="bi bi-globe"></i>
-						</div>
+					</div>
+				</article>
+				<article class="case-row">
+					<span class="case-row__index">03</span>
+					<div class="case-row__body">
 						<h3>Portail client web</h3>
 						<p>Espace sécurisé pour documents, demandes et suivi.</p>
 						<ul class="case-list">
@@ -124,69 +111,44 @@
 							<li>Historique des demandes</li>
 							<li>Notifications automatiques</li>
 						</ul>
-					</article>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<section id="cta" class="section section-muted">
-		<div class="container">
-			<div class="section-heading">
-				<p class="eyebrow">Discutons</p>
-				<h2>Un besoin CRM, web ou mobile ?</h2>
-				<p class="section-lead">Audit rapide, plan d’action clair, et estimation réaliste.</p>
-				<div class="hero-actions">
-					<a href="#services" class="btn btn-primary btn-lg">Voir nos services</a>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<section id="contact-quick" class="section container">
-		<div class="section-heading">
-			<p class="eyebrow">Contact rapide</p>
-			<h2>Recevez un audit rapide de vos outils</h2>
-			<p class="section-lead">Un échange court pour identifier les priorités et les bons leviers.</p>
-		</div>
-		<div class="row g-4 align-items-center">
-			<div class="col-lg-6">
-				<article class="service-card">
-					<div class="service-card__icon">
-						<i class="bi bi-telephone"></i>
 					</div>
-					<h3>Un appel de cadrage offert</h3>
-					<p>Nous analysons vos outils, vos flux et vos priorités.</p>
+				</article>
+			</div>
+		</div>
+	</section>
+
+	<section id="contact-quick" class="section section-cta">
+		<div class="container">
+			<div class="cta-band">
+				<div class="cta-band__copy">
+					<p class="eyebrow">Discutons</p>
+					<h2>Un besoin CRM, web ou mobile&nbsp;?</h2>
+					<p class="section-lead">
+						Audit rapide, plan d’action clair et estimation réaliste. Réponse sous 24–48&nbsp;h ouvrées.
+					</p>
+					<div class="hero-actions">
+						<a href="mailto:developpeur.web.gard@gmail.com" class="btn btn-primary btn-lg">Écrire un email</a>
+						<a href="#services" class="btn btn-outline-light btn-lg">Voir nos services</a>
+					</div>
+				</div>
+				<div class="cta-band__aside">
+					<p class="cta-band__aside-label">Inclus dans le premier échange</p>
 					<ul class="case-list">
 						<li>Points de friction identifiés</li>
 						<li>Recommandations opérationnelles</li>
 						<li>Estimation réaliste</li>
 					</ul>
-				</article>
-			</div>
-			<div class="col-lg-6">
-				<article class="service-card">
-					<div class="service-card__icon">
-						<i class="bi bi-envelope"></i>
-					</div>
-					<h3>Contact direct</h3>
-					<p>Vous préférez l’email ? Réponse sous 24–48h ouvrées.</p>
-					<div class="hero-actions">
-						<a href="mailto:developpeur.web.gard@gmail.com" class="btn btn-primary btn-lg">Écrire un email</a>
-						<a href="#services" class="btn btn-outline-primary btn-lg">Voir nos offres</a>
-					</div>
-				</article>
+				</div>
 			</div>
 		</div>
 	</section>
 
-	<!-- Modale Bootstrap -->
 	<div class="modal fade" id="serviceModalCms" tabindex="-1" aria-labelledby="serviceModalCmsLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="serviceModalCmsLabel">Outils & automatisations CRM</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					<h5 class="modal-title" id="serviceModalCmsLabel">Outils &amp; automatisations CRM</h5>
+					<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
 					<p class="mb-3">Optimisez vos outils existants avec des automatisations fiables.</p>
@@ -208,8 +170,8 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="serviceModalVitrineLabel">Maintenance web & mobile</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					<h5 class="modal-title" id="serviceModalVitrineLabel">Maintenance web &amp; mobile</h5>
+					<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
 					<p class="mb-3">Gardez vos sites et apps stables, sécurisés et performants.</p>
@@ -231,8 +193,8 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="serviceModalEcommerceLabel">Apps web & mobile sur-mesure</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					<h5 class="modal-title" id="serviceModalEcommerceLabel">Apps web &amp; mobile sur-mesure</h5>
+					<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
 					<p class="mb-3">Développez des applications web et mobile alignées sur vos besoins.</p>
