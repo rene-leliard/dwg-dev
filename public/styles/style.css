@@ -237,12 +237,14 @@ body.light-mode .legal-page h2 {
 }
 
 .brand-logo-image {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    object-fit: cover;
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    width: auto;
+    height: 48px;
+    max-width: min(220px, 52vw);
+    border-radius: 10px;
+    object-fit: contain;
+    border: 1px solid rgba(255, 255, 255, 0.12);
     box-shadow: 0 6px 16px rgba(15, 23, 42, 0.25);
+    background: rgba(7, 16, 22, 0.35);
 }
 
 .nav-link {
@@ -1235,11 +1237,13 @@ body.light-mode .legal-page h2 {
 }
 
 .footer-logo-image {
-    width: 36px;
-    height: 36px;
+    width: auto;
+    height: 52px;
+    max-width: 220px;
     border-radius: 10px;
-    object-fit: cover;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    object-fit: contain;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(7, 16, 22, 0.35);
 }
 
 .footer-content {
