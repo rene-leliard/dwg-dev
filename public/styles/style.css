@@ -14,42 +14,79 @@ body {
 }
 
 :root {
-    --bg-color: #f3f1ec;
-    --surface-color: #fffdf8;
-    --surface-muted: #ebe7df;
-    --text-color: #152028;
-    --text-muted: #5b6670;
-    --primary: #0e7490;
-    --primary-600: #0a5c72;
+    --bg-color: #0d171d;
+    --surface-color: #132129;
+    --surface-muted: #182831;
+    --text-color: #e8eef2;
+    --text-muted: #9aa8b3;
+    --primary: #2dd4bf;
+    --primary-600: #14b8a6;
     --accent: #f59e0b;
-    --border-color: #ddd6cb;
+    --border-color: #243842;
     --brand-gradient: linear-gradient(145deg, #0b1c24 0%, #123a48 48%, #0e7490 100%);
-    --brand-soft: rgba(14, 116, 144, 0.12);
-    --brand-outline: rgba(14, 116, 144, 0.28);
-    --shadow-sm: 0 8px 20px rgba(15, 23, 42, 0.08);
-    --shadow-md: 0 18px 40px rgba(15, 23, 42, 0.14);
-    --radius-lg: 20px;
+    --brand-soft: rgba(45, 212, 191, 0.12);
+    --brand-outline: rgba(45, 212, 191, 0.28);
+    --shadow-sm: 0 10px 28px rgba(3, 10, 14, 0.28);
+    --shadow-md: 0 18px 40px rgba(3, 10, 14, 0.4);
+    --radius-lg: 18px;
     --radius-md: 14px;
     --radius-sm: 10px;
     --font-body: 'Figtree', 'Segoe UI', sans-serif;
     --font-display: 'Syne', 'Figtree', sans-serif;
 }
 
-body.dark-mode {
-    --bg-color: #0b1419;
-    --surface-color: #122028;
-    --surface-muted: #1a2c36;
-    --text-color: #e8eef2;
-    --text-muted: #9ca3af;
-    --primary: #2dd4bf;
-    --primary-600: #14b8a6;
-    --accent: #fbbf24;
-    --border-color: #243842;
-    --brand-gradient: linear-gradient(145deg, #071016 0%, #0f2f3a 48%, #0e7490 100%);
-    --brand-soft: rgba(45, 212, 191, 0.14);
-    --brand-outline: rgba(45, 212, 191, 0.28);
-    --shadow-sm: 0 10px 30px rgba(7, 16, 22, 0.4);
-    --shadow-md: 0 22px 50px rgba(7, 16, 22, 0.5);
+body.light-mode {
+    --bg-color: #eef3f5;
+    --surface-color: #ffffff;
+    --surface-muted: #e4ecef;
+    --text-color: #152028;
+    --text-muted: #5b6670;
+    --primary: #0e7490;
+    --primary-600: #0a5c72;
+    --accent: #d97706;
+    --border-color: #c9d6dc;
+    --brand-gradient: linear-gradient(145deg, #0b1c24 0%, #123a48 48%, #0e7490 100%);
+    --brand-soft: rgba(14, 116, 144, 0.12);
+    --brand-outline: rgba(14, 116, 144, 0.28);
+    --shadow-sm: 0 8px 20px rgba(15, 23, 42, 0.08);
+    --shadow-md: 0 18px 40px rgba(15, 23, 42, 0.14);
+}
+
+body.light-mode {
+    background-image:
+        radial-gradient(circle at 12% 18%, rgba(14, 116, 144, 0.1), transparent 42%),
+        radial-gradient(circle at 88% 8%, rgba(245, 158, 11, 0.08), transparent 36%),
+        linear-gradient(180deg, #f4f8f9, #eef3f5);
+}
+
+body.light-mode .section-heading h2,
+body.light-mode .stat-card span,
+body.light-mode .service-card h3,
+body.light-mode .formation-card h3 {
+    color: #152028;
+}
+
+body.light-mode .section-muted {
+    background: linear-gradient(180deg, rgba(14, 116, 144, 0.06), rgba(245, 158, 11, 0.04));
+    border-block-color: rgba(14, 116, 144, 0.1);
+}
+
+body.light-mode .stat-card,
+body.light-mode .service-card,
+body.light-mode .formation-card {
+    background: #ffffff;
+    border-color: var(--border-color);
+}
+
+body.light-mode .signature-pill {
+    background: rgba(14, 116, 144, 0.08);
+    border-color: rgba(14, 116, 144, 0.16);
+    color: #0a5c72;
+}
+
+body.light-mode .btn-outline-primary {
+    border-color: var(--primary);
+    color: var(--primary);
 }
 
 body {
@@ -59,9 +96,9 @@ body {
     line-height: 1.6;
     position: relative;
     background-image:
-        radial-gradient(circle at 12% 18%, rgba(14, 116, 144, 0.1), transparent 42%),
-        radial-gradient(circle at 88% 8%, rgba(245, 158, 11, 0.1), transparent 36%),
-        linear-gradient(180deg, rgba(14, 116, 144, 0.03), rgba(245, 158, 11, 0.02));
+        radial-gradient(circle at 12% 8%, rgba(14, 116, 144, 0.16), transparent 40%),
+        radial-gradient(circle at 88% 18%, rgba(245, 158, 11, 0.08), transparent 34%),
+        linear-gradient(180deg, #0b1419 0%, #0d171d 40%, #101c22 100%);
     background-attachment: fixed;
 }
 
@@ -71,7 +108,8 @@ a {
 }
 
 main.main-content {
-    background-color: var(--bg-color);
+    background: transparent;
+    border-top: 1px solid rgba(45, 212, 191, 0.12);
 }
 
 .site-header,
@@ -457,13 +495,15 @@ header.site-header {
 }
 
 .btn-outline-primary {
-    border-color: var(--primary);
-    color: var(--primary);
+    border: 2px solid rgba(45, 212, 191, 0.55);
+    color: #99f6e4;
+    background: transparent;
 }
 
 .btn-outline-primary:hover {
-    background: var(--brand-soft);
-    color: var(--primary-600);
+    background: rgba(45, 212, 191, 0.12);
+    border-color: #2dd4bf;
+    color: #f8fafc;
 }
 
 .btn-secondary {
@@ -478,46 +518,52 @@ header.site-header {
 }
 
 .section {
-    padding: 4.5rem 0;
+    padding: 5rem 0;
 }
 
 .section-muted {
-    background: linear-gradient(180deg, rgba(31, 91, 214, 0.05), rgba(16, 185, 129, 0.04));
+    background:
+        linear-gradient(180deg, rgba(14, 116, 144, 0.1), rgba(7, 16, 22, 0.15)),
+        linear-gradient(135deg, rgba(245, 158, 11, 0.04), transparent 55%);
+    border-block: 1px solid rgba(45, 212, 191, 0.08);
 }
 
 .section-heading {
     max-width: 720px;
-    margin: 0 auto 2.5rem;
-    text-align: center;
+    margin: 0 auto 2.75rem;
+    text-align: left;
 }
 
 .section-heading h2 {
-    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-size: clamp(1.85rem, 3vw, 2.7rem);
     font-weight: 700;
     margin-bottom: 1rem;
     font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    color: #f8fafc;
 }
 
 .section-heading h2::after {
     content: "";
     display: block;
-    width: 56px;
+    width: 72px;
     height: 3px;
-    margin: 0.75rem auto 0;
-    background: var(--brand-outline);
+    margin: 0.9rem 0 0;
+    background: linear-gradient(90deg, #f59e0b, #2dd4bf);
     border-radius: 999px;
 }
 
 .section-lead {
     color: var(--text-muted);
     font-size: 1.05rem;
+    max-width: 42ch;
 }
 
 .eyebrow {
     text-transform: uppercase;
     letter-spacing: 0.2em;
     font-size: 0.7rem;
-    color: var(--primary);
+    color: var(--accent);
     font-weight: 600;
     margin-bottom: 0.75rem;
     display: inline-flex;
@@ -529,13 +575,13 @@ header.site-header {
     content: "";
     width: 18px;
     height: 2px;
-    background: var(--primary);
+    background: var(--accent);
     border-radius: 999px;
 }
 
 .stats-grid {
     display: grid;
-    gap: 1.5rem;
+    gap: 1.25rem;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
@@ -543,41 +589,59 @@ header.site-header {
     margin-top: 2rem;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
-    justify-content: center;
+    gap: 0.65rem;
+    justify-content: flex-start;
 }
 
 .signature-pill {
-    padding: 0.4rem 0.9rem;
-    border-radius: 999px;
-    background: var(--brand-soft);
-    color: var(--primary);
+    padding: 0.45rem 0.85rem;
+    border-radius: 10px;
+    background: rgba(45, 212, 191, 0.08);
+    border: 1px solid rgba(45, 212, 191, 0.18);
+    color: #99f6e4;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
 }
 
 .signature-pill::before {
     content: "";
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
-    background: var(--primary);
+    background: var(--accent);
     display: inline-block;
     margin-right: 0.45rem;
 }
 
 .stat-card {
-    background: var(--surface-color);
+    background: linear-gradient(160deg, rgba(19, 33, 41, 0.95), rgba(15, 26, 32, 0.98));
     border-radius: var(--radius-md);
     padding: 1.75rem;
-    box-shadow: var(--shadow-sm);
-    border: 1px solid var(--border-color);
+    box-shadow: none;
+    border: 1px solid rgba(45, 212, 191, 0.14);
     text-align: left;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, #f59e0b, #2dd4bf);
 }
 
 .stat-card span {
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: clamp(1.6rem, 3vw, 2rem);
+    font-weight: 800;
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
+    color: #f8fafc;
+    display: block;
+    margin-bottom: 0.35rem;
 }
 
 .stat-card p {
@@ -587,32 +651,41 @@ header.site-header {
 
 .service-card,
 .formation-card {
-    background: var(--surface-color);
+    background: linear-gradient(165deg, rgba(19, 33, 41, 0.98), rgba(12, 22, 28, 0.98));
     border-radius: var(--radius-lg);
     padding: 2rem;
-    box-shadow: var(--shadow-sm);
-    border: 1px solid var(--border-color);
+    box-shadow: none;
+    border: 1px solid rgba(45, 212, 191, 0.12);
     height: 100%;
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.service-card:hover,
+.formation-card:hover {
+    border-color: rgba(245, 158, 11, 0.35);
+    transform: translateY(-2px);
 }
 
 .service-card.featured {
-    border: 2px solid var(--brand-outline);
-    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(245, 158, 11, 0.45);
+    background: linear-gradient(165deg, rgba(28, 38, 28, 0.35), rgba(19, 33, 41, 0.98) 40%);
+    box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.08);
 }
 
 .service-card__icon {
     width: 48px;
     height: 48px;
-    border-radius: 16px;
-    background: rgba(59, 130, 246, 0.1);
+    border-radius: 12px;
+    background: rgba(45, 212, 191, 0.12);
     color: var(--primary);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.4rem;
+    border: 1px solid rgba(45, 212, 191, 0.18);
 }
 
 .service-meta {
@@ -623,7 +696,10 @@ header.site-header {
 .formation-card h3,
 .service-card h3 {
     font-size: 1.35rem;
-    font-weight: 600;
+    font-weight: 700;
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    color: #f8fafc;
 }
 
 .formation-card p,
@@ -632,9 +708,10 @@ header.site-header {
 }
 
 .site-footer {
-    background: #0f172a;
-    color: #cbd5f5;
-    padding: 2.5rem 0;
+    background: linear-gradient(180deg, #071016 0%, #050b10 100%);
+    color: #cbd5e1;
+    padding: 3rem 0;
+    border-top: 1px solid rgba(45, 212, 191, 0.12);
 }
 
 .footer-brand {

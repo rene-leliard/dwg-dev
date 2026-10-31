@@ -4,21 +4,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (themeToggle) {
         const savedTheme = localStorage.getItem("theme");
-        if (savedTheme) {
-            body.classList.add(savedTheme);
-            themeToggle.innerHTML =
-                savedTheme === "dark-mode"
-                    ? '<i class="bi bi-sun"></i>'
-                    : '<i class="bi bi-moon"></i>';
+        // Le site est sombre par défaut pour coller au hero.
+        if (savedTheme === "light-mode") {
+            body.classList.add("light-mode");
+            themeToggle.innerHTML = '<i class="bi bi-moon"></i>';
+        } else {
+            body.classList.remove("light-mode");
+            themeToggle.innerHTML = '<i class="bi bi-sun"></i>';
         }
 
         themeToggle.addEventListener("click", () => {
-            body.classList.toggle("dark-mode");
-            const isDarkMode = body.classList.contains("dark-mode");
-            themeToggle.innerHTML = isDarkMode
-                ? '<i class="bi bi-sun"></i>'
-                : '<i class="bi bi-moon"></i>';
-            localStorage.setItem("theme", isDarkMode ? "dark-mode" : "light-mode");
+            const isLight = body.classList.toggle("light-mode");
+            themeToggle.innerHTML = isLight
+                ? '<i class="bi bi-moon"></i>'
+                : '<i class="bi bi-sun"></i>';
+            localStorage.setItem("theme", isLight ? "light-mode" : "dark-mode");
         });
     }
 
