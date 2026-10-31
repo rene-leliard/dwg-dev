@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     initHeroCanvas();
-    initHeroMotion();
+    initHeroIntro();
     initHeroPointer();
     initScrollReveals();
 });
@@ -164,10 +164,11 @@ function initHeroCanvas() {
     });
 }
 
-function initHeroMotion() {
+function initHeroIntro() {
     if (typeof gsap === "undefined") return;
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const hero = document.querySelector(".hero");
+    const curtain = document.getElementById("hero-curtain");
     if (!hero) return;
 
     const letters = hero.querySelectorAll(".hero-brand__letter");
@@ -177,22 +178,58 @@ function initHeroMotion() {
     const stage = hero.querySelector(".hero-stage");
     const brandLine = hero.querySelector(".hero-brand-line");
     const orbs = hero.querySelectorAll(".hero-orb");
+    const mediaImage = hero.querySelector(".hero-media__image");
+    const leftPanel = curtain?.querySelector(".hero-curtain__panel--left");
+    const rightPanel = curtain?.querySelector(".hero-curtain__panel--right");
+    const slash = curtain?.querySelector(".hero-curtain__slash");
+    const mark = curtain?.querySelector(".hero-curtain__mark");
 
     if (reduceMotion) {
         gsap.set([letters, title, subtitle, actions, brandLine], { clearProps: "all", opacity: 1 });
         if (brandLine) gsap.set(brandLine, { width: "7.5rem" });
+        if (curtain) curtain.classList.add("is-done");
         return;
     }
 
     gsap.set(letters, { y: 56, rotateX: -28, scale: 0.92 });
-    gsap.set([title, subtitle, actions].filter(Boolean), { y: 28, opacity: 0.35 });
+    gsap.set([title, subtitle, actions].filter(Boolean), { y: 28, opacity: 0.2 });
     if (brandLine) gsap.set(brandLine, { width: 0, opacity: 1 });
-    if (stage) gsap.set(stage, { scale: 1.06 });
-    if (orbs.length) gsap.set(orbs, { scale: 0.85, opacity: 0.55 });
+    if (stage) gsap.set(stage, { scale: 1.08 });
+    if (orbs.length) gsap.set(orbs, { scale: 0.85, opacity: 0.45 });
+    if (mediaImage) gsap.set(mediaImage, { scale: 1.16 });
+    if (slash) gsap.set(slash, { width: 0, opacity: 1 });
+    if (mark) gsap.set(mark, { opacity: 0, scale: 0.92 });
 
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-    if (stage) tl.to(stage, { scale: 1, duration: 1.35 }, 0);
-    if (orbs.length) tl.to(orbs, { scale: 1, opacity: 1, duration: 1.2, stagger: 0.12 }, 0);
+
+    if (curtain && leftPanel && rightPanel && slash && mark) {
+        tl.to(mark, { opacity: 1, scale: 1, duration: 0.45 }, 0.05)
+            .to(slash, { width: "min(42vw, 280px)", duration: 0.55 }, 0.15)
+            .to(leftPanel, { xPercent: -102, duration: 0.85, ease: "power4.inOut" }, 0.55)
+            .to(rightPanel, { xPercent: 102, duration: 0.85, ease: "power4.inOut" }, 0.55)
+            .to([mark, slash], { opacity: 0, duration: 0.25 }, 0.95)
+            .add(() => curtain.classList.add("is-done"), 1.45);
+    }
+
+    const contentStart = curtain ? 0.85 : 0;
+    if (stage) tl.to(stage, { scale: 1, duration: 1.4 }, contentStart);
+    if (mediaImage) {
+        tl.to(mediaImage, { scale: 1.08, duration: 1.6, ease: "power2.out" }, contentStart);
+        tl.to(
+            mediaImage,
+            {
+                scale: 1.02,
+                xPercent: -1.5,
+                yPercent: -1,
+                duration: 12,
+                ease: "none",
+                repeat: -1,
+                yoyo: true,
+            },
+            contentStart + 1.5
+        );
+    }
+    if (orbs.length) tl.to(orbs, { scale: 1, opacity: 1, duration: 1.2, stagger: 0.12 }, contentStart);
     if (letters.length) {
         tl.to(
             letters,
@@ -203,7 +240,7 @@ function initHeroMotion() {
                 duration: 0.9,
                 stagger: 0.12,
             },
-            0.08
+            contentStart + 0.15
         );
     }
     if (brandLine) tl.to(brandLine, { width: "7.5rem", duration: 0.7, ease: "power2.out" }, "-=0.35");
@@ -214,7 +251,7 @@ function initHeroMotion() {
     if (typeof ScrollTrigger !== "undefined") {
         gsap.registerPlugin(ScrollTrigger);
         gsap.to(stage, {
-            yPercent: 16,
+            yPercent: 12,
             ease: "none",
             scrollTrigger: {
                 trigger: hero,

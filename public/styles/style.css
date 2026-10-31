@@ -159,12 +159,61 @@ header.site-header {
     background: rgba(255, 255, 255, 0.2);
 }
 
+.hero-curtain {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    display: grid;
+    place-items: center;
+}
+
+.hero-curtain.is-done {
+    visibility: hidden;
+}
+
+.hero-curtain__panel {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 52%;
+    background: #050b10;
+}
+
+.hero-curtain__panel--left {
+    left: 0;
+}
+
+.hero-curtain__panel--right {
+    right: 0;
+}
+
+.hero-curtain__slash {
+    position: absolute;
+    width: 0;
+    height: 3px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #f59e0b, #2dd4bf);
+    z-index: 2;
+}
+
+.hero-curtain__mark {
+    position: relative;
+    z-index: 3;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2.8rem, 10vw, 5.5rem);
+    letter-spacing: -0.06em;
+    color: #f8fafc;
+    opacity: 0;
+}
+
 .hero {
     position: relative;
-    min-height: min(92vh, 920px);
+    min-height: min(88vh, 860px);
     display: flex;
-    align-items: flex-end;
-    padding: 2rem 0 4.5rem;
+    align-items: center;
+    padding: 5.5rem 0 3.5rem;
     isolation: isolate;
     background: #071016;
 }
@@ -175,10 +224,23 @@ header.site-header {
     z-index: 0;
     overflow: hidden;
     transform-origin: center center;
-    background:
-        radial-gradient(ellipse 80% 60% at 75% 25%, rgba(14, 116, 144, 0.45), transparent 65%),
-        radial-gradient(ellipse 50% 40% at 15% 80%, rgba(245, 158, 11, 0.18), transparent 60%),
-        linear-gradient(160deg, #071016 0%, #0f2f3a 55%, #0a4d5c 100%);
+    background: #071016;
+}
+
+.hero-media {
+    position: absolute;
+    inset: -4%;
+    overflow: hidden;
+}
+
+.hero-media__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    transform: scale(1.08);
+    filter: saturate(0.92) contrast(1.05);
+    will-change: transform;
 }
 
 .hero-canvas {
@@ -187,7 +249,7 @@ header.site-header {
     width: 100%;
     height: 100%;
     display: block;
-    opacity: 0.7;
+    opacity: 0.38;
     mix-blend-mode: screen;
 }
 
@@ -249,7 +311,9 @@ header.site-header {
 .hero-stage__wash {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(7, 16, 22, 0.2) 0%, rgba(7, 16, 22, 0.45) 45%, rgba(7, 16, 22, 0.9) 100%);
+    background:
+        linear-gradient(90deg, rgba(7, 16, 22, 0.88) 0%, rgba(7, 16, 22, 0.55) 42%, rgba(7, 16, 22, 0.35) 100%),
+        linear-gradient(180deg, rgba(7, 16, 22, 0.45) 0%, rgba(7, 16, 22, 0.25) 35%, rgba(7, 16, 22, 0.82) 100%);
     pointer-events: none;
 }
 
@@ -295,8 +359,8 @@ header.site-header {
     margin: 0;
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: clamp(4.5rem, 16vw, 9.5rem);
-    line-height: 0.9;
+    font-size: clamp(5rem, 18vw, 10.5rem);
+    line-height: 0.86;
     letter-spacing: -0.06em;
     color: #ffffff;
     text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
@@ -915,9 +979,9 @@ form .form-check-label {
 
 @media (max-width: 768px) {
     .hero {
-        min-height: 88vh;
-        align-items: flex-end;
-        padding: 1.5rem 0 3.25rem;
+        min-height: 86vh;
+        align-items: center;
+        padding: 4.5rem 0 2.75rem;
     }
 
     .hero-brand {
@@ -956,5 +1020,13 @@ form .form-check-label {
 
     .hero-spotlight {
         display: none;
+    }
+
+    .hero-curtain {
+        display: none;
+    }
+
+    .hero-media__image {
+        transform: none;
     }
 }
