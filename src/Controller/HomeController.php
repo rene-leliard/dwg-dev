@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Form\ContactType;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
@@ -14,6 +15,12 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class HomeController extends AbstractController
 {
+    public function __construct(
+        #[Autowire('%env(MAILER_DSN)%')]
+        private readonly string $mailerDsn,
+    ) {
+    }
+
     #[Route('/', name: 'app_home')]
     public function index(
         Request $request,
@@ -58,35 +65,41 @@ class HomeController extends AbstractController
                 $data['message']
             );
 
+            // Toujours archiver localement (filet de secours + historique)
+            $this->archiveContact($body, $data['email']);
+
             $sent = false;
-            try {
-                $emailMessage = (new Email())
-                    ->from(new Address('noreply@dwg-dev.fr', 'DWG Contact'))
-                    ->replyTo(new Address($data['email'], $data['name']))
-                    ->to('developpeur.web.gard@gmail.com')
-                    ->subject(sprintf('[DWG] %s — %s', $data['name'], $needLabels[$data['need']] ?? 'Contact'))
-                    ->text($body);
+            $mailDisabled = str_starts_with($this->mailerDsn, 'null://');
 
-                $mailer->send($emailMessage);
-                $sent = true;
-            } catch (\Throwable $e) {
-                $logger->error('Contact mail failed: '.$e->getMessage(), ['exception' => $e]);
-            }
+            if (!$mailDisabled) {
+                try {
+                    $emailMessage = (new Email())
+                        ->from(new Address('developpeur.web.gard@gmail.com', 'DWG Contact'))
+                        ->replyTo(new Address($data['email'], $data['name']))
+                        ->to('developpeur.web.gard@gmail.com')
+                        ->subject(sprintf('[DWG] %s — %s', $data['name'], $needLabels[$data['need']] ?? 'Contact'))
+                        ->text($body);
 
-            // Filet de secours si le SMTP est down (auto-hébergement)
-            if (!$sent) {
-                $fallbackDir = $this->getParameter('kernel.project_dir').'/var/contact';
-                if (!is_dir($fallbackDir)) {
-                    @mkdir($fallbackDir, 0775, true);
+                    $mailer->send($emailMessage);
+                    $sent = true;
+                } catch (\Throwable $e) {
+                    $logger->error('Contact mail failed: '.$e->getMessage(), ['exception' => $e]);
                 }
-                $file = $fallbackDir.'/'.date('Y-m-d_His').'_'.preg_replace('/[^a-z0-9_-]+/i', '-', $data['email']).'.txt';
-                @file_put_contents($file, $body);
+            } else {
+                $logger->warning('Contact received but MAILER_DSN is null:// — email not sent, archived in var/contact.');
             }
 
-            $this->addFlash(
-                'success',
-                'Merci '.$data['name'].' — votre message est bien parti. Réponse sous 24–48 h ouvrées.'
-            );
+            if ($sent) {
+                $this->addFlash(
+                    'success',
+                    'Merci '.$data['name'].' — votre message est bien parti. Réponse sous 24–48 h ouvrées.'
+                );
+            } else {
+                $this->addFlash(
+                    'warning',
+                    'Votre demande a bien été enregistrée, mais l’envoi email a échoué. On vous recontactera dès que possible, ou écrivez à developpeur.web.gard@gmail.com.'
+                );
+            }
 
             return $this->redirect($this->generateUrl('app_home').'#contact');
         }
@@ -94,5 +107,17 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'contactForm' => $form->createView(),
         ]);
+    }
+
+    private function archiveContact(string $body, string $email): void
+    {
+        $fallbackDir = $this->getParameter('kernel.project_dir').'/var/contact';
+        if (!is_dir($fallbackDir)) {
+            @mkdir($fallbackDir, 0775, true);
+        }
+
+        $safeEmail = preg_replace('/[^a-z0-9_-]+/i', '-', $email) ?: 'unknown';
+        $file = $fallbackDir.'/'.date('Y-m-d_His').'_'.$safeEmail.'.txt';
+        @file_put_contents($file, $body);
     }
 }
