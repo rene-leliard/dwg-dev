@@ -18,6 +18,11 @@ class HomeController extends AbstractController
     public function __construct(
         #[Autowire('%env(MAILER_DSN)%')]
         private readonly string $mailerDsn,
+        // Expéditeur Brevo validé (un From Gmail est accepté par l’API puis rejeté à la livraison)
+        #[Autowire('%mail_from_address%')]
+        private readonly string $mailFromAddress,
+        #[Autowire('%mail_to_address%')]
+        private readonly string $mailToAddress,
     ) {
     }
 
@@ -74,9 +79,9 @@ class HomeController extends AbstractController
             if (!$mailDisabled) {
                 try {
                     $emailMessage = (new Email())
-                        ->from(new Address('developpeur.web.gard@gmail.com', 'DWG Contact'))
+                        ->from(new Address($this->mailFromAddress, 'DWG Contact'))
                         ->replyTo(new Address($data['email'], $data['name']))
-                        ->to('developpeur.web.gard@gmail.com')
+                        ->to($this->mailToAddress)
                         ->subject(sprintf('[DWG] %s — %s', $data['name'], $needLabels[$data['need']] ?? 'Contact'))
                         ->text($body);
 

@@ -97,6 +97,10 @@ class ContactType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([]);
+        // Jeton CSRF session (pas "submit" stateless) : pas besoin du JS AssetMapper/Stimulus.
+        $resolver->setDefaults([
+            'csrf_protection' => true,
+            'csrf_token_id' => 'contact',
+        ]);
     }
 }

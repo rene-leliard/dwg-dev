@@ -258,6 +258,7 @@
 						Réponse sous 24–48&nbsp;h ouvrées. Plus le besoin est clair, plus le retour est actionnable.
 					</p>
 					{{ form_start(contactForm, { attr: { class: 'contact-form', novalidate: 'novalidate' } }) }}
+						{{ form_errors(contactForm) }}
 						<div class="contact-form__grid">
 							<div class="contact-form__field">
 								{{ form_label(contactForm.name) }}
