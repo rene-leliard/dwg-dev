@@ -18,17 +18,20 @@ class ContactType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'label' => 'Nom',
+                'help' => 'Obligatoire — 120 caractères max.',
                 'constraints' => [
                     new Assert\NotBlank(message: 'Indiquez votre nom.'),
-                    new Assert\Length(max: 120),
+                    new Assert\Length(max: 120, maxMessage: 'Le nom ne peut pas dépasser {{ limit }} caractères.'),
                 ],
                 'attr' => [
                     'placeholder' => 'Votre nom',
                     'autocomplete' => 'name',
+                    'maxlength' => 120,
                 ],
             ])
             ->add('email', EmailType::class, [
                 'label' => 'Email',
+                'help' => 'Obligatoire — pour vous répondre.',
                 'constraints' => [
                     new Assert\NotBlank(message: 'Indiquez votre email.'),
                     new Assert\Email(message: 'Email invalide.'),
@@ -40,15 +43,20 @@ class ContactType extends AbstractType
             ])
             ->add('company', TextType::class, [
                 'label' => 'Entreprise (optionnel)',
+                'help' => 'Facultatif — 160 caractères max.',
                 'required' => false,
-                'constraints' => [new Assert\Length(max: 160)],
+                'constraints' => [
+                    new Assert\Length(max: 160, maxMessage: 'Le nom d’entreprise ne peut pas dépasser {{ limit }} caractères.'),
+                ],
                 'attr' => [
                     'placeholder' => 'Nom de votre structure',
                     'autocomplete' => 'organization',
+                    'maxlength' => 160,
                 ],
             ])
             ->add('need', ChoiceType::class, [
                 'label' => 'Besoin principal',
+                'help' => 'Obligatoire — choisissez la catégorie la plus proche.',
                 'placeholder' => 'Choisir…',
                 'choices' => [
                     'CRM & automatisations' => 'crm',
@@ -60,6 +68,7 @@ class ContactType extends AbstractType
             ])
             ->add('budget', ChoiceType::class, [
                 'label' => 'Budget indicatif',
+                'help' => 'Obligatoire — une fourchette suffit, même approximative.',
                 'placeholder' => 'Choisir…',
                 'choices' => [
                     'À définir ensemble' => 'a_definir',
@@ -72,13 +81,22 @@ class ContactType extends AbstractType
             ])
             ->add('message', TextareaType::class, [
                 'label' => 'Votre projet',
+                'help' => 'Obligatoire — 20 caractères minimum, 4000 max.',
                 'constraints' => [
                     new Assert\NotBlank(message: 'Décrivez brièvement votre besoin.'),
-                    new Assert\Length(min: 20, max: 4000, minMessage: 'Ajoutez un peu plus de détail (20 caractères min.).'),
+                    new Assert\Length(
+                        min: 20,
+                        max: 4000,
+                        minMessage: 'Ajoutez un peu plus de détail ({{ limit }} caractères min.).',
+                        maxMessage: 'Le message ne peut pas dépasser {{ limit }} caractères.',
+                    ),
                 ],
                 'attr' => [
                     'placeholder' => 'Contexte, outil actuel, objectif, délai souhaité…',
                     'rows' => 5,
+                    'minlength' => 20,
+                    'maxlength' => 4000,
+                    'data-char-counter-target' => 'contact-message',
                 ],
             ])
             // Honeypot anti-spam

@@ -26,7 +26,38 @@ document.addEventListener("DOMContentLoaded", () => {
     initHeroIntro();
     initHeroPointer();
     initScrollReveals();
+    initContactForm();
 });
+
+function initContactForm() {
+    const form = document.querySelector("[data-contact-form]");
+    const flash = document.getElementById("contact-flash");
+
+    if (flash) {
+        flash.focus({ preventScroll: true });
+        flash.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    if (!form) return;
+
+    const field = form.querySelector("[data-char-counter-target]");
+    const counter = form.querySelector("[data-char-counter]");
+    if (!field || !counter) return;
+
+    const countEl = counter.querySelector("[data-char-count]");
+    const min = Number(field.getAttribute("minlength") || 20);
+    const max = Number(field.getAttribute("maxlength") || 4000);
+
+    const update = () => {
+        const len = field.value.length;
+        if (countEl) countEl.textContent = String(len);
+        counter.classList.toggle("is-short", len > 0 && len < min);
+        counter.classList.toggle("is-ok", len >= min && len <= max);
+    };
+
+    field.addEventListener("input", update);
+    update();
+}
 
 function initHeroCanvas() {
     const canvas = document.getElementById("hero-canvas");

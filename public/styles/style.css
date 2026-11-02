@@ -188,8 +188,76 @@ header.site-header {
     color: #f8fafc;
 }
 
-.flash-wrap .alert {
+.flash-wrap {
+    position: relative;
+    z-index: 5;
+}
+
+.flash-wrap .alert,
+.flash-alert {
     border-radius: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    margin-top: 1rem;
+    margin-bottom: 0;
+    border: 1px solid transparent;
+    font-weight: 500;
+}
+
+.flash-alert i {
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+}
+
+.alert-success.flash-alert {
+    background: rgba(16, 185, 129, 0.16);
+    border-color: rgba(16, 185, 129, 0.45);
+    color: #a7f3d0;
+}
+
+.alert-warning.flash-alert {
+    background: rgba(245, 158, 11, 0.16);
+    border-color: rgba(245, 158, 11, 0.45);
+    color: #fde68a;
+}
+
+.alert-danger.flash-alert,
+.alert-error.flash-alert {
+    background: rgba(239, 68, 68, 0.16);
+    border-color: rgba(239, 68, 68, 0.45);
+    color: #fecaca;
+}
+
+body.light-mode .alert-success.flash-alert {
+    background: #ecfdf5;
+    border-color: #6ee7b7;
+    color: #065f46;
+}
+
+body.light-mode .alert-warning.flash-alert {
+    background: #fffbeb;
+    border-color: #fcd34d;
+    color: #92400e;
+}
+
+body.light-mode .alert-danger.flash-alert,
+body.light-mode .alert-error.flash-alert {
+    background: #fef2f2;
+    border-color: #fca5a5;
+    color: #991b1b;
+}
+
+.contact-flash {
+    margin: 0 0 1rem;
+}
+
+.contact-flash:focus {
+    outline: none;
+}
+
+.contact-flash__alert {
+    margin-top: 0;
 }
 
 .legal-page h2 {
@@ -938,6 +1006,17 @@ body.light-mode .legal-page h2 {
     margin-top: 0.5rem;
 }
 
+.contact-form__legend {
+    margin: 0 0 1rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.contact-form__req {
+    color: var(--accent);
+    font-weight: 700;
+}
+
 .contact-form__grid {
     display: grid;
     gap: 0.9rem;
@@ -958,35 +1037,115 @@ body.light-mode .legal-page h2 {
     display: block;
     font-weight: 600;
     margin-bottom: 0.35rem;
-    color: #e2e8f0;
+    color: var(--text-color);
+}
+
+.contact-form__field label.required::after {
+    content: ' *';
+    color: var(--accent);
+    font-weight: 700;
 }
 
 .contact-form .form-control,
 .contact-form .form-select {
-    background: rgba(7, 16, 22, 0.65);
-    border: 1px solid rgba(45, 212, 191, 0.22);
-    color: #f8fafc;
+    background: var(--surface-muted);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
     border-radius: 10px;
     padding: 0.7rem 0.85rem;
+    color-scheme: dark;
+}
+
+.contact-form .form-control::placeholder {
+    color: var(--text-muted);
+    opacity: 0.85;
 }
 
 .contact-form .form-control:focus,
 .contact-form .form-select:focus {
-    border-color: #f59e0b;
+    border-color: var(--accent);
     box-shadow: 0 0 0 0.2rem rgba(245, 158, 11, 0.2);
-    background: rgba(7, 16, 22, 0.85);
-    color: #f8fafc;
+    background: var(--surface-color);
+    color: var(--text-color);
+}
+
+.contact-form .form-control.is-invalid,
+.contact-form .form-select.is-invalid {
+    border-color: #f87171;
 }
 
 .contact-form .form-select option {
-    color: #152028;
+    background: var(--surface-color);
+    color: var(--text-color);
 }
 
-.contact-form ul {
+.contact-form .form-control:-webkit-autofill,
+.contact-form .form-control:-webkit-autofill:hover,
+.contact-form .form-control:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--text-color);
+    box-shadow: 0 0 0 1000px var(--surface-muted) inset;
+    transition: background-color 99999s ease-out;
+}
+
+.contact-form .form-text,
+.contact-form .help-text,
+.contact-form__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.35rem 1rem;
+    margin-top: 0.35rem;
+}
+
+.contact-form .form-text,
+.contact-form .help-text {
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    margin-bottom: 0;
+}
+
+.contact-form__counter {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.contact-form__counter.is-short {
+    color: #fbbf24;
+}
+
+.contact-form__counter.is-ok {
+    color: #6ee7b7;
+}
+
+.contact-form ul,
+.contact-form .invalid-feedback {
+    display: block;
     margin: 0.35rem 0 0;
-    padding-left: 1rem;
+    padding-left: 0;
+    list-style: none;
     color: #fca5a5;
     font-size: 0.9rem;
+}
+
+body.light-mode .contact-form .form-control,
+body.light-mode .contact-form .form-select {
+    color-scheme: light;
+}
+
+body.light-mode .contact-form ul,
+body.light-mode .contact-form .invalid-feedback {
+    color: #b91c1c;
+}
+
+body.light-mode .contact-form__counter.is-ok {
+    color: #047857;
+}
+
+body.light-mode .contact-form__counter.is-short {
+    color: #b45309;
 }
 
 .cta-band__note {
@@ -1521,12 +1680,49 @@ body.light-mode .legal-page h2 {
 form .form-control,
 form .form-select,
 form textarea,
-form input {
+form input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]) {
     background: var(--surface-color);
     border: 1px solid var(--border-color);
     color: var(--text-color);
     border-radius: var(--radius-sm);
     padding: 0.65rem 0.9rem;
+    color-scheme: dark;
+}
+
+form .form-control::placeholder,
+form textarea::placeholder {
+    color: var(--text-muted);
+    opacity: 0.85;
+}
+
+form .form-control:focus,
+form .form-select:focus,
+form textarea:focus {
+    background: var(--surface-muted);
+    border-color: var(--accent);
+    color: var(--text-color);
+    box-shadow: 0 0 0 0.2rem rgba(245, 158, 11, 0.18);
+}
+
+form .form-select option {
+    background: var(--surface-color);
+    color: var(--text-color);
+}
+
+form .form-control:-webkit-autofill,
+form .form-control:-webkit-autofill:hover,
+form .form-control:-webkit-autofill:focus,
+form textarea:-webkit-autofill {
+    -webkit-text-fill-color: var(--text-color);
+    box-shadow: 0 0 0 1000px var(--surface-color) inset;
+    transition: background-color 99999s ease-out;
+}
+
+body.light-mode form .form-control,
+body.light-mode form .form-select,
+body.light-mode form textarea,
+body.light-mode form input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]) {
+    color-scheme: light;
 }
 
 form .form-label {
@@ -1620,6 +1816,12 @@ body.light-mode .contact-form .form-select {
     background: #fff;
     color: #152028;
     border-color: var(--border-color);
+}
+
+body.light-mode .contact-form .form-control:focus,
+body.light-mode .contact-form .form-select:focus {
+    background: #fff;
+    color: #152028;
 }
 
 body.light-mode .page-hero__title {

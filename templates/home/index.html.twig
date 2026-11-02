@@ -3,6 +3,8 @@
 {% block title %}DWG — CRM, portails & apps métiers{% endblock %}
 {% block body_class %}page-home{% endblock %}
 {% block header_class %}{% endblock %}
+{# Affichés dans la section contact pour être visibles après #contact #}
+{% block flashes %}{% endblock %}
 
 {% block curtain %}
 	<div class="hero-curtain" id="hero-curtain" aria-hidden="true">
@@ -257,37 +259,70 @@
 					<p class="section-lead">
 						Réponse sous 24–48&nbsp;h ouvrées. Plus le besoin est clair, plus le retour est actionnable.
 					</p>
-					{{ form_start(contactForm, { attr: { class: 'contact-form', novalidate: 'novalidate' } }) }}
+					<p class="contact-form__legend">Les champs marqués d’un <span class="contact-form__req" aria-hidden="true">*</span><span class="visually-hidden">astérisque</span> sont obligatoires.</p>
+
+					{% set contactFlashes = app.flashes %}
+					{% if contactFlashes %}
+						<div class="contact-flash" id="contact-flash" tabindex="-1">
+							{% for label, messages in contactFlashes %}
+								{% for message in messages %}
+									<div class="alert alert-{{ label }} flash-alert contact-flash__alert" role="status">
+										{% if label == 'success' %}
+											<i class="bi bi-check-circle-fill" aria-hidden="true"></i>
+										{% elseif label == 'warning' %}
+											<i class="bi bi-exclamation-triangle-fill" aria-hidden="true"></i>
+										{% else %}
+											<i class="bi bi-info-circle-fill" aria-hidden="true"></i>
+										{% endif %}
+										<span>{{ message }}</span>
+									</div>
+								{% endfor %}
+							{% endfor %}
+						</div>
+					{% endif %}
+
+					{{ form_start(contactForm, { attr: { class: 'contact-form', novalidate: 'novalidate', 'data-contact-form': '1' } }) }}
 						{{ form_errors(contactForm) }}
 						<div class="contact-form__grid">
 							<div class="contact-form__field">
 								{{ form_label(contactForm.name) }}
 								{{ form_widget(contactForm.name, { attr: { class: 'form-control' } }) }}
+								{{ form_help(contactForm.name) }}
 								{{ form_errors(contactForm.name) }}
 							</div>
 							<div class="contact-form__field">
 								{{ form_label(contactForm.email) }}
 								{{ form_widget(contactForm.email, { attr: { class: 'form-control' } }) }}
+								{{ form_help(contactForm.email) }}
 								{{ form_errors(contactForm.email) }}
 							</div>
 							<div class="contact-form__field contact-form__field--full">
 								{{ form_label(contactForm.company) }}
 								{{ form_widget(contactForm.company, { attr: { class: 'form-control' } }) }}
+								{{ form_help(contactForm.company) }}
 								{{ form_errors(contactForm.company) }}
 							</div>
 							<div class="contact-form__field">
 								{{ form_label(contactForm.need) }}
 								{{ form_widget(contactForm.need, { attr: { class: 'form-select' } }) }}
+								{{ form_help(contactForm.need) }}
 								{{ form_errors(contactForm.need) }}
 							</div>
 							<div class="contact-form__field">
 								{{ form_label(contactForm.budget) }}
 								{{ form_widget(contactForm.budget, { attr: { class: 'form-select' } }) }}
+								{{ form_help(contactForm.budget) }}
 								{{ form_errors(contactForm.budget) }}
 							</div>
 							<div class="contact-form__field contact-form__field--full">
 								{{ form_label(contactForm.message) }}
 								{{ form_widget(contactForm.message, { attr: { class: 'form-control' } }) }}
+								<div class="contact-form__meta">
+									{{ form_help(contactForm.message) }}
+									<p class="contact-form__counter" data-char-counter="contact-message" aria-live="polite">
+										<span data-char-count>0</span> / 4000 — minimum 20
+									</p>
+								</div>
 								{{ form_errors(contactForm.message) }}
 							</div>
 						</div>
