@@ -1148,8 +1148,14 @@ body.light-mode .contact-form__counter.is-short {
     color: #b45309;
 }
 
+.cta-band__direct {
+    margin-top: 1.35rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid rgba(45, 212, 191, 0.14);
+}
+
 .cta-band__note {
-    margin: 1.25rem 0 0;
+    margin: 0.45rem 0 0;
     color: var(--text-muted);
     font-size: 0.92rem;
 }
@@ -1157,6 +1163,27 @@ body.light-mode .contact-form__counter.is-short {
 .cta-band__note a {
     color: #99f6e4;
     font-weight: 600;
+}
+
+.cta-band__phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 1.05rem;
+}
+
+.cta-band__note--muted {
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+}
+
+body.light-mode .cta-band__note a,
+body.light-mode .cta-band__phone {
+    color: var(--primary-600);
+}
+
+body.light-mode .cta-band__direct {
+    border-top-color: var(--border-color);
 }
 
 .case-row {

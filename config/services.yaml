@@ -6,6 +6,10 @@
 parameters:
     env(MAIL_FROM_ADDRESS): 'noreply@cavallier2l.dwg-dev.fr'
     env(MAIL_TO_ADDRESS): 'developpeur.web.gard@gmail.com'
+    env(CONTACT_PHONE): ''
+    env(CONTACT_PHONE_DISPLAY): ''
+    env(SITE_PUBLIC_URL): 'https://dwg-dev.fr'
+    site_public_url_fallback: 'https://dwg-dev.fr'
     mail_from_address: '%env(MAIL_FROM_ADDRESS)%'
     mail_to_address: '%env(MAIL_TO_ADDRESS)%'
 

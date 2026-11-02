@@ -59,9 +59,9 @@ class ContactType extends AbstractType
                 'help' => 'Obligatoire — choisissez la catégorie la plus proche.',
                 'placeholder' => 'Choisir…',
                 'choices' => [
-                    'CRM & automatisations' => 'crm',
-                    'Maintenance web / mobile' => 'maintenance',
-                    'App web ou mobile sur-mesure' => 'app',
+                    'Suivi clients, devis, relances' => 'crm',
+                    'Maintenance site / app' => 'maintenance',
+                    'App ou outil sur-mesure' => 'app',
                     'Autre / à préciser' => 'autre',
                 ],
                 'constraints' => [new Assert\NotBlank(message: 'Sélectionnez un besoin.')],

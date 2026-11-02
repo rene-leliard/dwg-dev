@@ -47,9 +47,9 @@ class HomeController extends AbstractController
             }
 
             $needLabels = [
-                'crm' => 'CRM & automatisations',
-                'maintenance' => 'Maintenance web / mobile',
-                'app' => 'App web ou mobile sur-mesure',
+                'crm' => 'Suivi clients, devis, relances',
+                'maintenance' => 'Maintenance site / app',
+                'app' => 'App ou outil sur-mesure',
                 'autre' => 'Autre',
             ];
             $budgetLabels = [

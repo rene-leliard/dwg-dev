@@ -1,5 +1,11 @@
 twig:
     file_name_pattern: '*.twig'
+    globals:
+        contact_email: 'developpeur.web.gard@gmail.com'
+        # Renseigner CONTACT_PHONE (+336…) et CONTACT_PHONE_DISPLAY (06 …) dans .env
+        contact_phone: '%env(default::CONTACT_PHONE)%'
+        contact_phone_display: '%env(default::CONTACT_PHONE_DISPLAY)%'
+        site_public_url: '%env(default:site_public_url_fallback:SITE_PUBLIC_URL)%'
 
 when@test:
     twig:
