@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}DWG — Outils métiers pour artisans & TPE (Gard){% endblock %}
+{% block title %}DWG — Outils métiers pour artisans & TPE{% endblock %}
 {% block body_class %}page-home{% endblock %}
 {% block header_class %}{% endblock %}
 {# Affichés dans la section contact pour être visibles après #contact #}
@@ -15,11 +15,18 @@
 	</div>
 {% endblock %}
 
+{% block head_extra %}
+	<link rel="preload" as="image" href="{{ asset('images/hero-workspace.webp') }}" type="image/webp" fetchpriority="high">
+{% endblock %}
+
 {% block hero %}
 	<section class="hero" aria-label="Introduction DWG">
 		<div class="hero-stage" aria-hidden="true">
 			<div class="hero-media">
-				<img class="hero-media__image" src="{{ asset('images/hero-workspace.jpg') }}" alt="Poste de travail développeur avec écrans d’outils métiers" width="1920" height="1080" decoding="async" fetchpriority="high">
+				<picture>
+					<source srcset="{{ asset('images/hero-workspace.webp') }}" type="image/webp">
+					<img class="hero-media__image" src="{{ asset('images/hero-workspace.jpg') }}" alt="Poste de travail développeur avec écrans d’outils métiers" width="1280" height="720" decoding="async" fetchpriority="high">
+				</picture>
 			</div>
 			<canvas id="hero-canvas" class="hero-canvas"></canvas>
 			<div class="hero-orb hero-orb--teal"></div>
@@ -52,7 +59,7 @@
 					<p class="eyebrow">À propos</p>
 					<h2>René, développeur à Saint-Victor-la-Coste</h2>
 					<p class="section-lead">
-						Je conçois et maintiens des outils numériques pour artisans et TPE du Gard — sans jargon inutile, avec un seul interlocuteur du premier échange à la mise en service.
+						Je conçois et maintiens des outils numériques pour artisans et TPE — basé dans le Gard, j’accompagne aussi les entreprises à distance partout en France. Sans jargon inutile, avec un seul interlocuteur du premier échange à la mise en service.
 					</p>
 				</div>
 				<div class="stats-grid">
@@ -150,16 +157,96 @@
 			<article class="case-feature">
 				<div class="case-feature__main">
 					<p class="case-feature__tag">Godin-eau — Occitanie / réseaux d’eau</p>
-					<h3>Structurer l’ordonnancement et le suivi terrain</h3>
+					<h3>Organiser le planning et le suivi des interventions</h3>
 					<p>
 						Godin-eau intervient auprès de mairies, régies et syndicats pour la relève / le renouvellement de compteurs et le géoréférencement des réseaux.
 						L’enjeu : fiabiliser la planification des interventions et offrir un suivi plus clair aux abonnés — sans empiler les tableurs et les allers-retours.
 					</p>
+					<div id="godinCarousel" class="carousel slide case-carousel" data-bs-ride="false" data-bs-interval="false" aria-label="Aperçus de l’outil Godin-eau (données anonymisées)">
+						<div class="carousel-indicators">
+							<button type="button" data-bs-target="#godinCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Planning"></button>
+							<button type="button" data-bs-target="#godinCarousel" data-bs-slide-to="1" aria-label="Affectations"></button>
+							<button type="button" data-bs-target="#godinCarousel" data-bs-slide-to="2" aria-label="Suivi chantier"></button>
+						</div>
+						<div class="carousel-inner">
+							<div class="carousel-item active">
+								<button
+									type="button"
+									class="case-carousel__zoom"
+									data-lightbox-src="{{ asset('images/godin-eau-planning.jpg') }}"
+									data-lightbox-alt="Planning mensuel des techniciens — clients et noms anonymisés"
+									data-lightbox-caption="Planning terrain — noms et chantiers anonymisés"
+								>
+									<img
+										src="{{ asset('images/godin-eau-planning.jpg') }}"
+										alt="Planning mensuel des techniciens — clients et noms anonymisés"
+										width="1600"
+										height="900"
+										loading="lazy"
+										decoding="async"
+									>
+									<span class="case-carousel__hint" aria-hidden="true"><i class="bi bi-zoom-in"></i></span>
+									<span class="visually-hidden">Agrandir l’image</span>
+								</button>
+								<p class="case-carousel__caption">Planning terrain — noms et chantiers anonymisés</p>
+							</div>
+							<div class="carousel-item">
+								<button
+									type="button"
+									class="case-carousel__zoom"
+									data-lightbox-src="{{ asset('images/godin-eau-affectation.jpg') }}"
+									data-lightbox-alt="Administration des affectations agents / secteurs — données anonymisées"
+									data-lightbox-caption="Affectations agents / lots — données anonymisées"
+								>
+									<img
+										src="{{ asset('images/godin-eau-affectation.jpg') }}"
+										alt="Administration des affectations agents / secteurs — données anonymisées"
+										width="1600"
+										height="900"
+										loading="lazy"
+										decoding="async"
+									>
+									<span class="case-carousel__hint" aria-hidden="true"><i class="bi bi-zoom-in"></i></span>
+									<span class="visually-hidden">Agrandir l’image</span>
+								</button>
+								<p class="case-carousel__caption">Affectations agents / lots — données anonymisées</p>
+							</div>
+							<div class="carousel-item">
+								<button
+									type="button"
+									class="case-carousel__zoom case-carousel__zoom--portrait"
+									data-lightbox-src="{{ asset('images/godin-eau-suivi.jpg') }}"
+									data-lightbox-alt="Suivi de chantier — montants fictifs à titre d’illustration, non contractuels"
+									data-lightbox-caption="Suivi chantier — montants fictifs (illustration uniquement), sans lien avec les chiffres réels de Godin-eau"
+								>
+									<img
+										src="{{ asset('images/godin-eau-suivi.jpg') }}"
+										alt="Suivi de chantier — montants fictifs à titre d’illustration, non contractuels"
+										width="900"
+										height="1200"
+										loading="lazy"
+										decoding="async"
+									>
+									<span class="case-carousel__hint" aria-hidden="true"><i class="bi bi-zoom-in"></i></span>
+									<span class="visually-hidden">Agrandir l’image</span>
+								</button>
+								<p class="case-carousel__caption">Suivi chantier — <strong>montants fictifs</strong> (illustration uniquement), sans lien avec les chiffres réels de Godin-eau</p>
+							</div>
+						</div>
+						<button class="carousel-control-prev" type="button" data-bs-target="#godinCarousel" data-bs-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Précédent</span>
+						</button>
+						<button class="carousel-control-next" type="button" data-bs-target="#godinCarousel" data-bs-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Suivant</span>
+						</button>
+					</div>
 					<div class="case-feature__cols">
 						<div>
 							<h4>Ce qui a été livré</h4>
 							<ul class="case-list">
-								<li>Outil d’ordonnancement adapté au flux terrain</li>
+								<li>Outil de planning adapté aux interventions sur le terrain</li>
 								<li>Suivi des interventions et des statuts</li>
 								<li>Vue opérationnelle pour les équipes</li>
 								<li>Accompagnement à la prise en main</li>
@@ -171,7 +258,7 @@
 								<li>Planification plus lisible au quotidien</li>
 								<li>Moins de friction entre bureau et terrain</li>
 								<li>Meilleure traçabilité des interventions</li>
-								<li>Base solide pour faire évoluer le pôle ordonnancement</li>
+								<li>Base solide pour faire évoluer le pôle planning</li>
 							</ul>
 						</div>
 					</div>
@@ -180,7 +267,7 @@
 					<p class="case-feature__aside-label">Le client</p>
 					<div class="case-metric"><strong>Godin-eau</strong><span>Relève &amp; renouvellement de compteurs</span></div>
 					<div class="case-metric"><strong>National</strong><span>Interventions réseaux d’eau</span></div>
-					<div class="case-metric"><strong>Métier</strong><span>Ordonnancement &amp; suivi abonnés</span></div>
+					<div class="case-metric"><strong>Métier</strong><span>Planning &amp; suivi abonnés</span></div>
 					<a href="https://www.godin-eau.com/" class="btn btn-outline-primary" target="_blank" rel="noopener">Voir leur site</a>
 					<a href="#contact" class="btn btn-primary">Un projet similaire ?</a>
 				</aside>
@@ -231,7 +318,7 @@
 					<ul class="case-list">
 						<li>Surveillance &amp; correctifs</li>
 						<li>Mises à jour maîtrisées</li>
-						<li>Petit quota d’évolutions</li>
+						<li>Évolutions : volume et conditions définis dans le forfait proposé</li>
 					</ul>
 					<a href="#contact" class="btn btn-primary">Demander un forfait</a>
 				</article>
@@ -250,7 +337,15 @@
 		</div>
 	</section>
 
-	<section id="contact" class="section section-cta">
+	{% set contactFlashes = app.flashes %}
+	{% set contactFlashLabels = contactFlashes|keys %}
+	{% set contactStatus = contactFormHasErrors|default(false) ? 'error' : ( 'success' in contactFlashLabels ? 'success' : ( 'warning' in contactFlashLabels ? 'warning' : '' ) ) %}
+	<section
+		id="contact"
+		class="section section-cta"
+		data-contact-status="{{ contactStatus }}"
+		{% if contactStatus %}data-contact-feedback="1"{% endif %}
+	>
 		<div class="container">
 			<div class="cta-band cta-band--form">
 				<div class="cta-band__copy">
@@ -259,11 +354,10 @@
 					<p class="section-lead">
 						Réponse sous 24–48&nbsp;h ouvrées. Décrivez simplement ce qui vous ralentit au quotidien — on verra ensemble la suite.
 					</p>
-					<p class="contact-form__legend">Les champs marqués d’un <span class="contact-form__req" aria-hidden="true">*</span><span class="visually-hidden">astérisque</span> sont obligatoires.</p>
+					<p class="contact-form__legend">Nom, email et message suffisent pour un premier échange. Les champs marqués d’un <span class="contact-form__req" aria-hidden="true">*</span><span class="visually-hidden">astérisque</span> sont obligatoires.</p>
 
-					{% set contactFlashes = app.flashes %}
 					{% if contactFlashes %}
-						<div class="contact-flash" id="contact-flash" tabindex="-1">
+						<div class="contact-flash" id="contact-flash" tabindex="-1" data-contact-flash="{{ contactStatus ?: 'info' }}">
 							{% for label, messages in contactFlashes %}
 								{% for message in messages %}
 									<div class="alert alert-{{ label }} flash-alert contact-flash__alert" role="status">
@@ -279,48 +373,83 @@
 								{% endfor %}
 							{% endfor %}
 						</div>
+					{% elseif contactFormHasErrors|default(false) %}
+						<div class="contact-flash" id="contact-flash" tabindex="-1" data-contact-flash="error">
+							<div class="alert alert-danger flash-alert contact-flash__alert" role="alert">
+								<i class="bi bi-exclamation-triangle-fill" aria-hidden="true"></i>
+								<div class="contact-flash__body">
+									<strong>Votre demande n’a pas pu être envoyée.</strong>
+									<p class="contact-flash__hint">Corrigez les points ci-dessous, puis renvoyez le formulaire.</p>
+									<ul class="contact-flash__errors">
+										{% for error in contactForm.vars.errors %}
+											<li>{{ error.message }}</li>
+										{% endfor %}
+										{% for child in contactForm.children %}
+											{% if child.vars.name != 'website' %}
+												{% for error in child.vars.errors %}
+													<li>
+														<a href="#{{ child.vars.id }}">{{ child.vars.label }} — {{ error.message }}</a>
+													</li>
+												{% endfor %}
+											{% endif %}
+										{% endfor %}
+									</ul>
+								</div>
+							</div>
+						</div>
 					{% endif %}
 
-					{{ form_start(contactForm, { attr: { class: 'contact-form', novalidate: 'novalidate', 'data-contact-form': '1' } }) }}
-						{{ form_errors(contactForm) }}
+					{% if contactStatus != 'success' %}
+					{{ form_start(contactForm, {
+						action: path('app_home') ~ '#contact',
+						attr: {
+							class: 'contact-form',
+							novalidate: 'novalidate',
+							'data-contact-form': '1',
+							'aria-describedby': contactFormHasErrors|default(false) ? 'contact-flash' : false
+						}
+					}) }}
+						{% if contactForm.vars.errors|length and not contactFormHasErrors|default(false) %}
+							{{ form_errors(contactForm) }}
+						{% endif %}
 						<div class="contact-form__grid">
-							<div class="contact-form__field">
+							<div class="contact-form__field{% if not contactForm.name.vars.valid %} contact-form__field--invalid{% endif %}">
 								{{ form_label(contactForm.name) }}
-								{{ form_widget(contactForm.name, { attr: { class: 'form-control' } }) }}
+								{{ form_widget(contactForm.name, { attr: { class: 'form-control' ~ (contactForm.name.vars.valid ? '' : ' is-invalid'), 'aria-invalid': contactForm.name.vars.valid ? 'false' : 'true' } }) }}
 								{{ form_help(contactForm.name) }}
 								{{ form_errors(contactForm.name) }}
 							</div>
-							<div class="contact-form__field">
+							<div class="contact-form__field{% if not contactForm.email.vars.valid %} contact-form__field--invalid{% endif %}">
 								{{ form_label(contactForm.email) }}
-								{{ form_widget(contactForm.email, { attr: { class: 'form-control' } }) }}
+								{{ form_widget(contactForm.email, { attr: { class: 'form-control' ~ (contactForm.email.vars.valid ? '' : ' is-invalid'), 'aria-invalid': contactForm.email.vars.valid ? 'false' : 'true' } }) }}
 								{{ form_help(contactForm.email) }}
 								{{ form_errors(contactForm.email) }}
 							</div>
-							<div class="contact-form__field contact-form__field--full">
+							<div class="contact-form__field contact-form__field--full{% if not contactForm.company.vars.valid %} contact-form__field--invalid{% endif %}">
 								{{ form_label(contactForm.company) }}
-								{{ form_widget(contactForm.company, { attr: { class: 'form-control' } }) }}
+								{{ form_widget(contactForm.company, { attr: { class: 'form-control' ~ (contactForm.company.vars.valid ? '' : ' is-invalid'), 'aria-invalid': contactForm.company.vars.valid ? 'false' : 'true' } }) }}
 								{{ form_help(contactForm.company) }}
 								{{ form_errors(contactForm.company) }}
 							</div>
-							<div class="contact-form__field">
+							<div class="contact-form__field{% if not contactForm.need.vars.valid %} contact-form__field--invalid{% endif %}">
 								{{ form_label(contactForm.need) }}
-								{{ form_widget(contactForm.need, { attr: { class: 'form-select' } }) }}
+								{{ form_widget(contactForm.need, { attr: { class: 'form-select' ~ (contactForm.need.vars.valid ? '' : ' is-invalid'), 'aria-invalid': contactForm.need.vars.valid ? 'false' : 'true' } }) }}
 								{{ form_help(contactForm.need) }}
 								{{ form_errors(contactForm.need) }}
 							</div>
-							<div class="contact-form__field">
+							<div class="contact-form__field{% if not contactForm.budget.vars.valid %} contact-form__field--invalid{% endif %}">
 								{{ form_label(contactForm.budget) }}
-								{{ form_widget(contactForm.budget, { attr: { class: 'form-select' } }) }}
+								{{ form_widget(contactForm.budget, { attr: { class: 'form-select' ~ (contactForm.budget.vars.valid ? '' : ' is-invalid'), 'aria-invalid': contactForm.budget.vars.valid ? 'false' : 'true' } }) }}
 								{{ form_help(contactForm.budget) }}
 								{{ form_errors(contactForm.budget) }}
 							</div>
-							<div class="contact-form__field contact-form__field--full">
+							<div class="contact-form__field contact-form__field--full{% if not contactForm.message.vars.valid %} contact-form__field--invalid{% endif %}">
 								{{ form_label(contactForm.message) }}
-								{{ form_widget(contactForm.message, { attr: { class: 'form-control' } }) }}
+								{{ form_widget(contactForm.message, { attr: { class: 'form-control' ~ (contactForm.message.vars.valid ? '' : ' is-invalid'), 'aria-invalid': contactForm.message.vars.valid ? 'false' : 'true' } }) }}
 								<div class="contact-form__meta">
 									{{ form_help(contactForm.message) }}
 									<p class="contact-form__counter" data-char-counter="contact-message" aria-live="polite">
-										<span data-char-count>0</span> / 4000 — minimum 20
+										<span data-char-count>0</span> / 4000
 									</p>
 								</div>
 								{{ form_errors(contactForm.message) }}
@@ -330,6 +459,9 @@
 						{{ form_rest(contactForm) }}
 						<button type="submit" class="btn btn-primary btn-lg">Envoyer ma demande</button>
 					{{ form_end(contactForm) }}
+					{% else %}
+						<p class="contact-form__after-success">Vous pouvez aussi me joindre directement à droite si besoin.</p>
+					{% endif %}
 				</div>
 				<aside class="cta-band__aside">
 					<p class="cta-band__aside-label">Ce que vous obtenez</p>
@@ -351,7 +483,7 @@
 						<p class="cta-band__note">
 							<a href="mailto:{{ contact_email }}">{{ contact_email }}</a>
 						</p>
-						<p class="cta-band__note cta-band__note--muted">René Leliard — Saint-Victor-la-Coste (Gard)</p>
+						<p class="cta-band__note cta-band__note--muted">René Leliard — Saint-Victor-la-Coste (Gard) · aussi à distance</p>
 					</div>
 				</aside>
 			</div>
@@ -376,7 +508,7 @@
 					</ul>
 				</div>
 				<div class="modal-footer">
-					<a href="#contact" class="btn btn-primary" data-bs-dismiss="modal">Discutons de votre besoin</a>
+					<button type="button" class="btn btn-primary" data-scroll-after-modal="#contact">Discutons de votre besoin</button>
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
 				</div>
 			</div>
@@ -396,11 +528,11 @@
 						<li>Correctifs rapides et mises à jour maîtrisées.</li>
 						<li>Optimisation des temps de réponse.</li>
 						<li>Sauvegardes et plan de reprise.</li>
-						<li>Roadmap d’évolutions priorisées.</li>
+						<li>Liste priorisée des prochaines évolutions.</li>
 					</ul>
 				</div>
 				<div class="modal-footer">
-					<a href="#contact" class="btn btn-primary" data-bs-dismiss="modal">Demander un forfait</a>
+					<button type="button" class="btn btn-primary" data-scroll-after-modal="#contact">Demander un forfait</button>
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
 				</div>
 			</div>
@@ -424,10 +556,31 @@
 					</ul>
 				</div>
 				<div class="modal-footer">
-					<a href="#contact" class="btn btn-primary" data-bs-dismiss="modal">Lancer un projet</a>
+					<button type="button" class="btn btn-primary" data-scroll-after-modal="#contact">Lancer un projet</button>
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
 				</div>
 			</div>
 		</div>
 	</div>
+
+	<div class="modal fade" id="caseLightbox" tabindex="-1" aria-labelledby="caseLightboxCaption" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-xl case-lightbox__dialog">
+			<div class="modal-content case-lightbox">
+				<button type="button" class="btn-close btn-close-white case-lightbox__close" data-bs-dismiss="modal" aria-label="Fermer l’aperçu"></button>
+				<img id="caseLightboxImg" class="case-lightbox__img" src="" alt="">
+				<p id="caseLightboxCaption" class="case-lightbox__caption"></p>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block mobile_contact_bar %}
+	<aside class="mobile-contact-bar" data-mobile-contact-bar aria-label="Accès rapide contact">
+		{% if contact_phone %}
+			<a class="mobile-contact-bar__phone" href="tel:{{ contact_phone }}" aria-label="Appeler {{ contact_phone_display ?: contact_phone }}">
+				<i class="bi bi-telephone-fill" aria-hidden="true"></i>
+			</a>
+		{% endif %}
+		<a class="mobile-contact-bar__cta" href="#contact">Discutons de votre besoin</a>
+	</aside>
 {% endblock %}

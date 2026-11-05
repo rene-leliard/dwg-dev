@@ -9,6 +9,7 @@ services:
       DATABASE_URL: mysql://${MYSQL_USER:-app}:${MYSQL_PASSWORD:-!ChangeMe!}@database:3306/${MYSQL_DATABASE:-app}?serverVersion=8.0&charset=utf8mb4
     volumes:
       - ./:/var/www/html
+      - ./docker/php/conf.d/zz-security.ini:/usr/local/etc/php/conf.d/zz-security.ini:ro
       - app_vendor:/var/www/html/vendor
       - app_var:/var/www/html/var
     depends_on:

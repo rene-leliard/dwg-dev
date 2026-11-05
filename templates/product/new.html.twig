@@ -35,29 +35,5 @@
 		</div>
 	</section>
 
-	<script>
-		document.addEventListener('DOMContentLoaded', () => {
-const collectionHolder = document.querySelector('#sessions');
-const addButton = document.createElement('button');
-addButton.textContent = 'Ajouter une session';
-addButton.classList.add('btn', 'btn-outline-primary', 'mt-2');
-collectionHolder.after(addButton);
-
-let index = collectionHolder.querySelectorAll('.session-item').length;
-
-addButton.addEventListener('click', (e) => {
-e.preventDefault();
-const prototype = collectionHolder.dataset.prototype;
-
-if (! prototype) {
-console.error('Prototype manquant !');
-return;
-}
-
-let newForm = prototype.replace(/__name__/g, index);
-collectionHolder.insertAdjacentHTML('beforeend', newForm);
-index++;
-});
-});
-	</script>
+	<script src="{{ asset('script/product-sessions.js') }}"></script>
 {% endblock %}

@@ -13,5 +13,6 @@ RUN apk add --no-cache \
         opcache
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+COPY docker/php/conf.d/zz-security.ini /usr/local/etc/php/conf.d/zz-security.ini
 
 WORKDIR /var/www/html

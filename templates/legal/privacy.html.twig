@@ -4,36 +4,95 @@
 
 {% block body %}
 	<div class="container py-5 legal-page">
-		<p>Le site
+		<p>
+			Le site
 			<strong>dwg-dev.fr</strong>
-			collecte et traite certaines données personnelles, uniquement dans le cadre des fonctionnalités proposées :</p>
+			est édité par René Leliard (micro-entrepreneur). Cette page décrit les traitements de données personnelles réalisés via le site, conformément au RGPD et aux recommandations de transparence de la CNIL.
+		</p>
 
+		<h2>Données collectées</h2>
 		<ul>
-			<li>📬 Via le formulaire de contact : nom, adresse email, message</li>
-			<li>👤 Lors de la création d’un compte : nom, prénom, adresse email, mot de passe (chiffré)</li>
+			<li>Via le formulaire de contact :
+				<ul>
+					<li>Obligatoires : nom, adresse email, message</li>
+					<li>Facultatifs : entreprise, besoin principal, budget indicatif</li>
+				</ul>
+			</li>
+			<li>Lors de la création d’un compte : pseudo, adresse email, mot de passe (haché)</li>
+			<li>Données techniques de session nécessaires au fonctionnement du site (cookie de session)</li>
 		</ul>
 
-		<h2>Utilisation des données</h2>
-		<p>Les données collectées sont utilisées uniquement pour :</p>
+		<h2>Finalités</h2>
+		<p>Les données sont utilisées uniquement pour :</p>
 		<ul>
-			<li>Répondre à vos demandes de contact</li>
-			<li>Permettre la création et la gestion de votre compte utilisateur</li>
-			<li>Garantir le bon fonctionnement technique du site</li>
+			<li>Répondre aux demandes de contact et assurer le suivi des échanges</li>
+			<li>Créer et gérer un compte utilisateur</li>
+			<li>Assurer le bon fonctionnement technique et la sécurité du site</li>
 		</ul>
 
-		<h2>Durée de conservation</h2>
-		<p>Les données issues des formulaires ne sont pas stockées en base de données. Les comptes utilisateurs sont conservés tant qu’ils sont actifs. Vous pouvez demander la suppression de votre compte à tout moment.</p>
+		<h2>Bases légales</h2>
+		<ul>
+			<li>
+				<strong>Formulaire de contact</strong> :
+				intérêt légitime à répondre aux sollicitations (article&nbsp;6.1.f du RGPD),
+				et, lorsque la demande vise un projet ou une prestation, mesures précontractuelles à la demande de la personne (article&nbsp;6.1.b).
+			</li>
+			<li>
+				<strong>Compte utilisateur</strong> :
+				exécution du contrat / mesures précontractuelles liées à l’espace client (article&nbsp;6.1.b).
+			</li>
+			<li>
+				<strong>Cookies / session techniques</strong> :
+				intérêt légitime à faire fonctionner le site de façon sécurisée (article&nbsp;6.1.f), dans la limite des cookies strictement nécessaires.
+			</li>
+		</ul>
+
+		<h2>Traitement des demandes de contact</h2>
+		<p>
+			Lors de l’envoi du formulaire, le message est transmis par email (messagerie utilisée pour y répondre).
+			Une copie peut également être enregistrée sur le serveur (fichier d’archive technique), en dehors de la base de données applicative.
+			Ces éléments ne sont pas destinés à un usage commercial ni cédés à des tiers à des fins de prospection.
+		</p>
+
+		<h2>Durées de conservation</h2>
+		<ul>
+			<li>
+				<strong>Demandes de contact</strong> (email et archives techniques associées) :
+				conservées le temps nécessaire au traitement de la demande, puis
+				<strong>3&nbsp;ans à compter du dernier échange</strong>
+				lié à cette demande, sauf suppression anticipée à votre demande.
+			</li>
+			<li>
+				<strong>Comptes utilisateurs</strong> :
+				conservés tant que le compte est actif.
+				Un compte peut être supprimé à tout moment sur demande.
+				En l’absence de connexion pendant
+				<strong>3&nbsp;ans</strong>,
+				le compte peut être supprimé ou anonymisé après information préalable à l’adresse associée, sauf obligation légale contraire.
+			</li>
+			<li>
+				<strong>Session technique</strong> :
+				durée de la session de navigation (cookie technique).
+			</li>
+		</ul>
 
 		<h2>Sécurité</h2>
-		<p>Les mots de passe sont chiffrés et ne sont jamais enregistrés en clair. Aucune donnée personnelle n’est cédée ni utilisée à des fins commerciales.</p>
+		<p>Les mots de passe sont hachés et ne sont jamais enregistrés en clair. Aucune donnée personnelle n’est cédée ni utilisée à des fins commerciales.</p>
 
 		<h2>Vos droits</h2>
-		<p>Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez d’un droit d’accès, de rectification, de suppression et d’opposition. Vous pouvez exercer ces droits en contactant :</p>
 		<p>
-			<a href="mailto:developpeur.web.gard@gmail.com">developpeur.web.gard@gmail.com</a>
+			Conformément au RGPD, vous disposez d’un droit d’accès, de rectification, d’effacement, de limitation, d’opposition et, le cas échéant, de portabilité.
+			Vous pouvez exercer ces droits en contactant :
+		</p>
+		<p>
+			<a href="mailto:{{ contact_email }}">{{ contact_email }}</a>
+		</p>
+		<p>
+			Vous disposez également du droit d’introduire une réclamation auprès de la Commission nationale de l’informatique et des libertés (CNIL) :
+			<a href="https://www.cnil.fr" target="_blank" rel="noopener">www.cnil.fr</a>.
 		</p>
 
 		<h2>Cookies</h2>
-		<p>Ce site n’utilise pas de cookies de suivi ou de publicité. Seuls des cookies techniques essentiels au fonctionnement du site peuvent être utilisés.</p>
+		<p>Ce site n’utilise pas de cookies de suivi ou de publicité. Seuls des cookies techniques essentiels au fonctionnement du site peuvent être utilisés (par exemple la session nécessaire au formulaire et à la connexion).</p>
 	</div>
 {% endblock %}

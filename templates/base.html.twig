@@ -3,17 +3,55 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		{% set canonical_url = site_public_url ~ (app.request.pathInfo == '/' ? '' : app.request.pathInfo) %}
 		<title>
 			{% block title %}DWG — Outils numériques & apps métiers{% endblock %}
 		</title>
-		<meta name="description" content="{% block meta_description %}René Leliard (DWG), développeur à Saint-Victor-la-Coste : demandes, devis, factures, rendez-vous et outils métiers — clairs, utiles, sans jargon inutile. Premier échange offert.{% endblock %}">
+		<meta name="description" content="{% block meta_description %}René Leliard (DWG), développeur basé dans le Gard : outils métiers pour artisans et TPE, aussi à distance — demandes, devis, factures, rendez-vous. Premier échange offert.{% endblock %}">
+		<link rel="canonical" href="{{ canonical_url }}">
 		<meta property="og:type" content="website">
 		<meta property="og:locale" content="fr_FR">
 		<meta property="og:title" content="{% block og_title %}{{ block('title') }}{% endblock %}">
 		<meta property="og:description" content="{% block og_description %}{{ block('meta_description') }}{% endblock %}">
-		<meta property="og:url" content="{{ site_public_url }}{{ app.request.pathInfo == '/' ? '' : app.request.pathInfo }}">
+		<meta property="og:url" content="{{ canonical_url }}">
 		<meta property="og:image" content="{{ site_public_url }}{{ asset('images/hero-workspace.jpg') }}">
 		<meta name="theme-color" content="#0b1c24">
+		{% set business_ld = {
+			'@context': 'https://schema.org',
+			'@type': 'LocalBusiness',
+			'name': 'DWG',
+			'description': 'Outils métiers pour artisans et TPE. René Leliard, développeur à Saint-Victor-la-Coste (Gard), aussi à distance.',
+			'url': site_public_url,
+			'image': site_public_url ~ asset('images/logo-dwg.png'),
+			'email': contact_email,
+			'address': {
+				'@type': 'PostalAddress',
+				'streetAddress': '2 rue de la bronque',
+				'postalCode': '30290',
+				'addressLocality': 'Saint-Victor-la-Coste',
+				'addressRegion': 'Gard',
+				'addressCountry': 'FR'
+			},
+			'areaServed': {
+				'@type': 'AdministrativeArea',
+				'name': 'Gard'
+			},
+			'founder': {
+				'@type': 'Person',
+				'name': 'René Leliard'
+			},
+			'identifier': {
+				'@type': 'PropertyValue',
+				'name': 'SIRET',
+				'value': '93229067900012'
+			},
+			'sameAs': ['https://www.instagram.com/leliardrene/']
+		} %}
+		{% if contact_phone %}
+			{% set business_ld = business_ld|merge({telephone: contact_phone}) %}
+		{% endif %}
+		<script type="application/ld+json">{{ business_ld|json_encode|raw }}</script>
+		{% block head_extra %}{% endblock %}
 
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +60,7 @@
 		<link rel="apple-touch-icon" href="{{ asset('images/favicon-dwg.png') }}">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-		<link rel="stylesheet" href="{{ asset('styles/style.css') }}?v=14">
+		<link rel="stylesheet" href="{{ asset('styles/style.css') }}?v=22">
 	</head>
 	<body class="{% block body_class %}{% endblock %}">
 		{% block curtain %}{% endblock %}
@@ -32,9 +70,14 @@
 					<a class="navbar-brand" href="{{ path('app_home') }}">
 						<img class="brand-logo-image" src="{{ asset('images/logo-dwg.png') }}" alt="DWG — Développement web & applications métier">
 					</a>
-					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
+					<div class="navbar-tools">
+						<button type="button" id="theme-toggle" class="theme-toggle-btn" aria-label="Changer le mode clair ou sombre">
+							<i class="bi bi-sun" aria-hidden="true"></i>
+						</button>
+						<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Ouvrir le menu">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+					</div>
 					<div class="collapse navbar-collapse" id="navbarNav">
 						<ul class="navbar-nav ms-auto align-items-lg-center">
 							<li class="nav-item">
@@ -50,6 +93,9 @@
 								<a class="nav-link nav-link--cta" href="{{ path('app_home') }}#contact">Contact</a>
 							</li>
 							{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+								<li class="nav-item">
+									<a class="nav-link nav-link--muted" href="{{ path('client_dashboard') }}">Mon espace</a>
+								</li>
 								{% if is_granted('ROLE_ADMIN') %}
 									<li class="nav-item">
 										<a class="nav-link nav-link--muted" href="{{ path('admin_dashboard') }}">Admin</a>
@@ -67,11 +113,6 @@
 					</div>
 				</div>
 			</nav>
-			<div class="theme-toggle-container">
-				<button id="theme-toggle" aria-label="Changer le mode">
-					<i class="bi bi-sun"></i>
-				</button>
-			</div>
 			{% block hero %}
 			<div class="page-hero">
 				<div class="container">
@@ -104,7 +145,7 @@
 					<p class="footer-logo">
 						<img class="footer-logo-image" src="{{ asset('images/logo-dwg.png') }}" alt="Logo DWG">
 					</p>
-					<p class="footer-tagline">René Leliard — développeur à Saint-Victor-la-Coste (Gard).</p>
+					<p class="footer-tagline">René Leliard — Saint-Victor-la-Coste (Gard) · accompagnement aussi à distance.</p>
 				</div>
 				<div class="social-links">
 					<a href="{{ path('app_home') }}#services">Services</a>
@@ -129,9 +170,11 @@
 			</div>
 		</footer>
 
+		{% block mobile_contact_bar %}{% endblock %}
+
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-		<script src="{{ asset('script/script.js') }}?v=11"></script>
+		<script src="{{ asset('script/script.js') }}?v=15"></script>
 	</body>
 </html>
